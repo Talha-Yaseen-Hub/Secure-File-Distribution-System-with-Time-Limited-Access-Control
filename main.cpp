@@ -1,4 +1,5 @@
 #include <iostream>
+#include <filesystem>
 #include "menu.h"
 #include "filemanager.h"
 
@@ -6,16 +7,11 @@ using namespace std;
 
 int main()
 {
+    cout << "[DEBUG] Current working directory:\n"
+         << filesystem::current_path() << endl;
+
     int choice;
     bool running = true;
-
-    cout<<"========================================\n";
-    cout<<"  Secure File Distribution Application\n";
-    cout<<"========================================\n";
-    cout<<"This program allows users to secure files\n";
-    cout<<"with password protection and expiry time.\n";
-    cout<<"Only authorized users can open the file.\n";
-    cout<<"----------------------------------------\n";
 
     while(running)
     {
@@ -25,35 +21,26 @@ int main()
         switch(choice)
         {
             case 1:
-                cout<<"\n--- Secure File Selected ---\n";
                 secureFile();
                 break;
 
             case 2:
-                cout<<"\n--- Open Secure File Selected ---\n";
                 openSecureFile();
                 break;
 
             case 3:
-                cout<<"\nExiting...\n";
                 running = false;
                 break;
 
-            case -1:
-                cout<<"Invalid input type\n";
-                break;
-
             default:
-                cout<<"Invalid option\n";
+                cout<<"Invalid choice\n";
         }
 
         if(running)
         {
-            cout<<"\nPress Enter to continue...";
+            cout<<"\nPress Enter...";
             cin.ignore();
             cin.get();
         }
     }
-
-    return 0;
 }

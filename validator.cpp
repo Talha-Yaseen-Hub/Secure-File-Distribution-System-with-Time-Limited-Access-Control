@@ -5,11 +5,11 @@ using namespace std;
 
 bool fileExists(string name)
 {
-    ifstream file(name);
-    return file.good();
+    ifstream f(name);
+    return f.good();
 }
 
 bool validTime(int t)
 {
-    return (t > 0);
+    return t > 0;
 }

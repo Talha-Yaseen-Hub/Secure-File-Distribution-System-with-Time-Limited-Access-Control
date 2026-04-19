@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <ctime>
 #include <cstdio>
 #include "filemanager.h"
 #include "encryption.h"
@@ -7,77 +9,92 @@
 
 using namespace std;
 
+void logAccess(string file,string status)
+{
+    ofstream log("access_log.txt", ios::app);
+
+    time_t now = time(0);
+
+    log<<"File: "<<file
+       <<" | Status: "<<status
+       <<" | Time: "<<ctime(&now);
+}
+
 void secureFile()
 {
-    string file;
-    string password;
-    int minutes;
+    string file, pass;
+    int timeLimit;
 
-    cout<<"Enter file name: ";
+    cout<<"Enter file: ";
     cin>>file;
 
     if(!fileExists(file))
     {
-        cout<<"File does not exist\n";
+        cout<<"File not found\n";
         return;
     }
 
     cout<<"Set password: ";
     cin.ignore();
-    getline(cin, password);
+    getline(cin, pass);
 
-    cout<<"Enter expiry time (minutes): ";
-    cin>>minutes;
+    cout<<"Expiry (minutes): ";
+    cin>>timeLimit;
 
-    if(!validTime(minutes))
+    if(!validTime(timeLimit))
     {
-        cout<<"Invalid time value\n";
+        cout<<"Invalid time\n";
         return;
     }
 
-    remove((file + ".enc").c_str());
-    remove((file + ".meta").c_str());
+    remove((file+".enc").c_str());
+    remove((file+".meta").c_str());
 
-    if(!encryptFile(file,file + ".enc",7))
-        return;
+    encryptFile(file, file+".enc", 7);
+    createMeta(file, pass, timeLimit);
 
-    if(!createMeta(file,password,minutes))
-        return;
-
-    cout<<"File secured successfully\n";
-    cout<<"Send these files:\n";
-    cout<<file<<".enc\n";
-    cout<<file<<".meta\n";
+    cout<<"File secured\n";
 }
 
 void openSecureFile()
 {
-    string file;
-    string password;
+    string file, pass;
 
-    cout<<"Enter file name: ";
+    cout<<"Enter file: ";
     cin>>file;
 
-    string encFile = file + ".enc";
-
-    cout << "[DEBUG] Trying to open: " << encFile << endl;
-
-    if(!fileExists(encFile))
+    if(!fileExists(file+".enc"))
     {
         cout<<"Encrypted file missing\n";
         return;
     }
 
-    cout<<"Enter password: ";
-    cin.ignore();
-    getline(cin, password);
+    int attempts = 3;
+    bool success = false;
 
-    if(verifyAccess(file,password))
+    while(attempts--)
     {
-        decryptFile(encFile,7);
+        cout<<"Enter password: ";
+        cin.ignore();
+        getline(cin, pass);
+
+        if(verifyAccess(file, pass))
+        {
+            success = true;
+            break;
+        }
+
+        cout<<"Attempts left: "<<attempts<<endl;
+    }
+
+    if(success)
+    {
+        decryptFile(file+".enc",7);
+        logAccess(file, "SUCCESS");
     }
     else
     {
-        cout<<"Access denied\n";
+        cout<<"Access blocked\n";
+        logAccess(file, "FAILED");
     }
 }

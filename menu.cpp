@@ -6,7 +6,7 @@ using namespace std;
 void showMenu()
 {
     cout<<"\n=============================\n";
-    cout<<" Secure File Sharing System\n";
+    cout<<" Secure File System\n";
     cout<<"=============================\n";
     cout<<"1 Secure File\n";
     cout<<"2 Open Secure File\n";
@@ -15,10 +15,9 @@ void showMenu()
 
 int getChoice()
 {
-    int choice;
-
+    int c;
     cout<<"Enter choice: ";
-    cin>>choice;
+    cin>>c;
 
     if(cin.fail())
     {
@@ -27,5 +26,5 @@ int getChoice()
         return -1;
     }
 
-    return choice;
+    return c;
 }

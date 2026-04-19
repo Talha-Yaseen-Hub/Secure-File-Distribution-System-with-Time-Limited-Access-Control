@@ -11,18 +11,12 @@ bool createMeta(string file,string password,int minutes)
     ofstream meta(file + ".meta");
 
     if(!meta)
-    {
-        cout<<"Meta file creation failed\n";
         return false;
-    }
 
-    time_t now = time(0);
-    time_t expiry = now + (minutes * 60);
+    time_t expiry = time(0) + minutes*60;
 
     meta<<password<<endl;
     meta<<expiry;
-
-    meta.close();
 
     return true;
 }
@@ -33,33 +27,27 @@ bool verifyAccess(string file,string password)
 
     if(!meta)
     {
-        cout<<"Meta file missing\n";
+        cout<<"Meta missing\n";
         return false;
     }
 
-    string savedPass;
+    string saved;
     time_t expiry;
 
-    getline(meta, savedPass);
-    meta >> expiry;
+    getline(meta, saved);
+    meta>>expiry;
 
-    meta.close();
-
-    if(password != savedPass)
+    if(password != saved)
     {
         cout<<"Wrong password\n";
         return false;
     }
 
-    time_t now = time(0);
-
-    if(now > expiry)
+    if(time(0) > expiry)
     {
-        cout<<"File expired\n";
-
-        remove((file + ".enc").c_str());
-        remove((file + ".meta").c_str());
-
+        cout<<"Expired\n";
+        remove((file+".enc").c_str());
+        remove((file+".meta").c_str());
         return false;
     }
 
