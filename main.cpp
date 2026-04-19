@@ -20,42 +20,31 @@ int main()
     while(running)
     {
         showMenu();
-
         choice = getChoice();
 
         switch(choice)
         {
             case 1:
-            {
                 cout<<"\n--- Secure File Selected ---\n";
                 secureFile();
                 break;
-            }
 
             case 2:
-            {
                 cout<<"\n--- Open Secure File Selected ---\n";
                 openSecureFile();
                 break;
-            }
 
             case 3:
-            {
-                cout<<"\nExiting program...\n";
+                cout<<"\nExiting...\n";
                 running = false;
                 break;
-            }
 
             case -1:
-            {
-                cout<<"Invalid input type. Please enter a number.\n";
+                cout<<"Invalid input type\n";
                 break;
-            }
 
             default:
-            {
-                cout<<"Invalid option. Please try again.\n";
-            }
+                cout<<"Invalid option\n";
         }
 
         if(running)
@@ -65,8 +54,6 @@ int main()
             cin.get();
         }
     }
-
-    cout<<"\nProgram terminated successfully.\n";
 
     return 0;
 }

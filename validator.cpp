@@ -6,17 +6,10 @@ using namespace std;
 bool fileExists(string name)
 {
     ifstream file(name);
-
-    if(file)
-        return true;
-
-    return false;
+    return file.good();
 }
 
 bool validTime(int t)
 {
-    if(t <= 0)
-        return false;
-
-    return true;
+    return (t > 0);
 }

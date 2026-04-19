@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdio>
 #include "filemanager.h"
 #include "encryption.h"
 #include "accesscontrol.h"
@@ -22,7 +23,8 @@ void secureFile()
     }
 
     cout<<"Set password: ";
-    cin>>password;
+    cin.ignore();
+    getline(cin, password);
 
     cout<<"Enter expiry time (minutes): ";
     cin>>minutes;
@@ -33,20 +35,17 @@ void secureFile()
         return;
     }
 
-    bool status;
+    remove((file + ".enc").c_str());
+    remove((file + ".meta").c_str());
 
-    status = encryptFile(file,file + ".enc",7);
-
-    if(!status)
+    if(!encryptFile(file,file + ".enc",7))
         return;
 
-    status = createMeta(file,password,minutes);
-
-    if(!status)
+    if(!createMeta(file,password,minutes))
         return;
 
     cout<<"File secured successfully\n";
-    cout<<"Send these files to receiver:\n";
+    cout<<"Send these files:\n";
     cout<<file<<".enc\n";
     cout<<file<<".meta\n";
 }
@@ -56,25 +55,26 @@ void openSecureFile()
     string file;
     string password;
 
-    cout<<"Enter file name : ";
+    cout<<"Enter file name: ";
     cin>>file;
 
-    if(!fileExists(file + ".enc"))
+    string encFile = file + ".enc";
+
+    cout << "[DEBUG] Trying to open: " << encFile << endl;
+
+    if(!fileExists(encFile))
     {
         cout<<"Encrypted file missing\n";
         return;
     }
 
     cout<<"Enter password: ";
-    cin>>password;
+    cin.ignore();
+    getline(cin, password);
 
-    bool access;
-
-    access = verifyAccess(file,password);
-
-    if(access)
+    if(verifyAccess(file,password))
     {
-        decryptFile(file + ".enc",7);
+        decryptFile(encFile,7);
     }
     else
     {

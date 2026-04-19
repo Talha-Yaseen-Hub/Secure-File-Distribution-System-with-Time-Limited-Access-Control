@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <ctime>
+#include <cstdio>
 #include "accesscontrol.h"
 
 using namespace std;
@@ -39,8 +40,8 @@ bool verifyAccess(string file,string password)
     string savedPass;
     time_t expiry;
 
-    meta>>savedPass;
-    meta>>expiry;
+    getline(meta, savedPass);
+    meta >> expiry;
 
     meta.close();
 
@@ -52,14 +53,15 @@ bool verifyAccess(string file,string password)
 
     time_t now = time(0);
 
- if(now > expiry)
-{
-    cout<<"File expired\n";
+    if(now > expiry)
+    {
+        cout<<"File expired\n";
 
-    remove((file + ".enc").c_str());
-    remove((file + ".meta").c_str());
+        remove((file + ".enc").c_str());
+        remove((file + ".meta").c_str());
 
-    return false;
-}
+        return false;
+    }
 
+    return true;
 }

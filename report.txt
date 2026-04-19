@@ -1,17 +1,1 @@
-Information Security Notes
-
-This file contains some basic information related to data security.
-The purpose of this file is to demonstrate the working of the
-Secure File Distribution System with Time-Limited Access Control.
-
-In this system, files are encrypted before sharing to ensure that
-unauthorized users cannot read the data directly.
-
-The file can only be opened by providing the correct password
-and within the allowed time limit set by the sender.
-
-If the expiry time is exceeded, the system will deny access
-to the file in order to protect sensitive information.
-
-This demonstration shows how encryption and access control
-can be used together to improve the security of file sharing.
+Project Title: Secure File Distribution System with Time-Limited Access Control
