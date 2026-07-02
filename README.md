@@ -16,9 +16,6 @@
 
 <br/><br/>
 
-<img src="https://img.shields.io/github/stars/Talha-Yaseen-Hub/Secure-File-Distribution-System?style=for-the-badge&color=FFD700&labelColor=1E3C72&label=Stars" />
-<img src="https://img.shields.io/github/forks/Talha-Yaseen-Hub/Secure-File-Distribution-System?style=for-the-badge&color=2A5298&labelColor=1E3C72&label=Forks" />
-<img src="https://img.shields.io/github/last-commit/Talha-Yaseen-Hub/Secure-File-Distribution-System?style=for-the-badge&color=00D9FF&labelColor=1E3C72&label=Last%20Commit" />
 
 </div>
 
