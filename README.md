@@ -547,6 +547,18 @@ This project is licensed under the **MIT License** — see the [LICENSE](./LICEN
 
 [⬆ Back to Top](#top)
 
+### 🔐 Happy Learning!
+
+*"Security is a continuous process, not a one-time solution."*
+
+</div>
+
+<br/>
+
+<div align="center">
+
+[⬆ Back to Top](#top)
+
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:2a5298,100:1e3c72&height=100&section=footer" width="100%"/>
 
 </div>
