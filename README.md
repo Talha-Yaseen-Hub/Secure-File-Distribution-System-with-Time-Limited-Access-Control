@@ -549,6 +549,8 @@ This project is licensed under the **MIT License** — see the [LICENSE](./LICEN
 
 <br/>
 
+---
+
 ## 🔐 Happy Learning!
 
 *"Security is a continuous process, not a one-time solution."*
