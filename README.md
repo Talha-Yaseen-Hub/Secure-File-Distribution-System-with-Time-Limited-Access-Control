@@ -531,9 +531,15 @@ If this project helped you understand file security concepts, consider giving it
 
 <br/>
 
-## 📜 License
+## 📜 MIT License
 
-This project is developed for **educational purposes only**. It demonstrates fundamental Information Security concepts and should not be considered a production-ready secure file sharing solution.
+<div align="center">
+
+<img src="https://img.shields.io/badge/License-MIT-FFD700?style=for-the-badge&labelColor=1E3C72" />
+
+This project is licensed under the **MIT License** — see the [LICENSE](./LICENSE) file for full details.
+
+</div>
 
 <br/>
 
